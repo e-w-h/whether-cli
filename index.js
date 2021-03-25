@@ -10,6 +10,11 @@ const req = https.get(url, res => {
   console.log(`statusCode: ${res.statusCode}`)
 
   res.on('data', data => {
+    let condition = JSON.parse(data.toString())['weather'][0]['main'].toLowerCase()
+    if (condition === 'rain') {
+      console.log('Bring an umbrella')
+    }
+    console.log(JSON.parse(data.toString()))
     console.log(JSON.parse(data.toString())['main']['temp'])
   })
 })
