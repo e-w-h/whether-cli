@@ -1,5 +1,12 @@
 const https = require('https')
-// const process = require('process')
+const fs = require('fs')
+
+let options = {
+  url: '',
+  zipcode: '',
+  country: '',
+  api_key: '',
+}
 
 const zipcode = '10021'
 const country = 'us'
@@ -8,8 +15,33 @@ const endpoints = {
   current: `https://api.openweathermap.org/data/2.5/weather?zip=${zipcode},${country}&appid=${API_key}&units=imperial`,
   forecast: `https://api.openweathermap.org/data/2.5/onecall?lat=40.7685&lon=-73.9588&exclude=current,daily,minutely,alerts&appid=${API_key}&units=imperial`,
 }
-// TODO: Gather more information regarding future weather conditions by consuming additional API endpoints
-// Chain promises
+
+console.log('Enter zipcode')
+process.stdin.on('data', data => {
+  options.zipcode = data
+  process.exit()
+})
+
+console.log('Current weather or hourly forecast? [c/f]')
+process.stdin.on('data', data => {
+  if (data === 'c') {
+    options.url = endpoints.current
+  } else if (data === 'f') {
+    options.url = endpoints.forecast
+  } else {
+    console.log('Invalid input')
+  }
+})
+
+options.country = country
+options.api_key = API_key
+
+
+fs.writeFile('options.txt', JSON.stringify(options), (err) => {
+  if (err) {
+    console.error(err)
+  }
+})
 
 const req = https.get(endpoints.current, res => {
   if (res.statusCode !== 200) {
