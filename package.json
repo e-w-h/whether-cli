@@ -1,0 +1,6 @@
+{
+  "name": "whether",
+  "dependencies": {
+    "mocha": "^8.3.2"
+  }
+}
