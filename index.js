@@ -53,7 +53,7 @@ const req = https.get(endpoints.current, res => {
     if (condition === 'rain') {
       console.log('Bring an umbrella')
     }
-    // console.log(JSON.parse(data.toString()))
+    console.log(JSON.parse(data.toString()))
     let actualTemp = JSON.parse(data.toString())['main']['temp']
     let feelsLike = JSON.parse(data.toString())['main']['feels_like']
     console.log(`Actual: ${actualTemp}, Feels like: ${feelsLike}`)
