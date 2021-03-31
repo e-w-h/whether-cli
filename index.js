@@ -6,6 +6,8 @@ let options = {
   zipcode: '',
   country: '',
   api_key: '',
+  lat: 0,
+  long: 0,
 }
 
 const zipcode = '10021'
@@ -36,6 +38,16 @@ process.stdin.on('data', data => {
 options.country = country
 options.api_key = API_key
 
+const getCoords = https.get(endpoints.current, res => {
+  if (res.statusCode !== 200) {
+    console.log(`Something went wrong. Status code: ${res.statusCode}`)
+  }
+  res.on('data', data => {
+    let body = JSON.parse(data.toString())
+    options.lat = body.coord.lat
+    options.lon = body.coord.lon
+  })
+})
 
 fs.writeFile('options.txt', JSON.stringify(options), (err) => {
   if (err) {
@@ -43,19 +55,19 @@ fs.writeFile('options.txt', JSON.stringify(options), (err) => {
   }
 })
 
-const req = https.get(endpoints.current, res => {
+const currentWeather = https.get(endpoints.current, res => {
   if (res.statusCode !== 200) {
     console.log(`Something went wrong. Status code: ${res.statusCode}`)
   }
 
   res.on('data', data => {
-    let condition = JSON.parse(data.toString())['weather'][0]['main'].toLowerCase()
+    let body = JSON.parse(data.toString())
+    let condition = body.weather[0].main.toLowerCase()
     if (condition === 'rain') {
       console.log('Bring an umbrella')
     }
-    console.log(JSON.parse(data.toString()))
-    let actualTemp = JSON.parse(data.toString())['main']['temp']
-    let feelsLike = JSON.parse(data.toString())['main']['feels_like']
+    let actualTemp = body['main']['temp']
+    let feelsLike = body['main']['feels_like']
     console.log(`Actual: ${actualTemp}, Feels like: ${feelsLike}`)
   })
 })
