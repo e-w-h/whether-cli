@@ -1,6 +1,12 @@
 {
   "name": "whether",
   "dependencies": {
-    "mocha": "^8.3.2"
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "prettier": "^2.2.1",
+    "request": "^2.88.2"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }

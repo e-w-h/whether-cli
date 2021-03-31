@@ -37,7 +37,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
-            ["mocha", "npm:8.3.2"]
+            ["chai", "npm:4.3.4"],
+            ["mocha", "npm:8.3.2"],
+            ["prettier", "npm:2.2.1"],
+            ["request", "npm:2.88.2"]
           ],
           "linkType": "SOFT",
         }]
@@ -174,6 +177,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["assertion-error", [
+        ["npm:1.1.0", {
+          "packageLocation": "./.yarn/cache/assertion-error-npm-1.1.0-66b893015e-7bbc9fa2ff.zip/node_modules/assertion-error/",
+          "packageDependencies": [
+            ["assertion-error", "npm:1.1.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["asynckit", [
         ["npm:0.4.0", {
           "packageLocation": "./.yarn/cache/asynckit-npm-0.4.0-c718858525-a024000b9d.zip/node_modules/asynckit/",
@@ -277,6 +289,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["chai", [
+        ["npm:4.3.4", {
+          "packageLocation": "./.yarn/cache/chai-npm-4.3.4-808f3b5355-ea3e6547b9.zip/node_modules/chai/",
+          "packageDependencies": [
+            ["chai", "npm:4.3.4"],
+            ["assertion-error", "npm:1.1.0"],
+            ["check-error", "npm:1.0.2"],
+            ["deep-eql", "npm:3.0.1"],
+            ["get-func-name", "npm:2.0.0"],
+            ["pathval", "npm:1.1.1"],
+            ["type-detect", "npm:4.0.8"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["chalk", [
         ["npm:4.1.0", {
           "packageLocation": "./.yarn/cache/chalk-npm-4.1.0-c746e252ba-f860285b41.zip/node_modules/chalk/",
@@ -284,6 +311,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chalk", "npm:4.1.0"],
             ["ansi-styles", "npm:4.3.0"],
             ["supports-color", "npm:7.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["check-error", [
+        ["npm:1.0.2", {
+          "packageLocation": "./.yarn/cache/check-error-npm-1.0.2-00c540c6e9-1460ad12da.zip/node_modules/check-error/",
+          "packageDependencies": [
+            ["check-error", "npm:1.0.2"]
           ],
           "linkType": "HARD",
         }]
@@ -427,6 +463,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/decamelize-npm-4.0.0-12410e3409-3846161a3b.zip/node_modules/decamelize/",
           "packageDependencies": [
             ["decamelize", "npm:4.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["deep-eql", [
+        ["npm:3.0.1", {
+          "packageLocation": "./.yarn/cache/deep-eql-npm-3.0.1-9a66c09c65-eff42bc2d4.zip/node_modules/deep-eql/",
+          "packageDependencies": [
+            ["deep-eql", "npm:3.0.1"],
+            ["type-detect", "npm:4.0.8"]
           ],
           "linkType": "HARD",
         }]
@@ -650,6 +696,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/get-caller-file-npm-2.0.5-80e8a86305-9dd9e1e259.zip/node_modules/get-caller-file/",
           "packageDependencies": [
             ["get-caller-file", "npm:2.0.5"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["get-func-name", [
+        ["npm:2.0.0", {
+          "packageLocation": "./.yarn/cache/get-func-name-npm-2.0.0-afbf363765-c72d3857cd.zip/node_modules/get-func-name/",
+          "packageDependencies": [
+            ["get-func-name", "npm:2.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -1226,6 +1281,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["pathval", [
+        ["npm:1.1.1", {
+          "packageLocation": "./.yarn/cache/pathval-npm-1.1.1-ce0311d7e0-81cd01d46c.zip/node_modules/pathval/",
+          "packageDependencies": [
+            ["pathval", "npm:1.1.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["performance-now", [
         ["npm:2.1.0", {
           "packageLocation": "./.yarn/cache/performance-now-npm-2.1.0-45e3ce7e49-bb4ebed0b0.zip/node_modules/performance-now/",
@@ -1240,6 +1304,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/picomatch-npm-2.2.2-1ce736a913-20fa75e0a5.zip/node_modules/picomatch/",
           "packageDependencies": [
             ["picomatch", "npm:2.2.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["prettier", [
+        ["npm:2.2.1", {
+          "packageLocation": "./.yarn/cache/prettier-npm-2.2.1-e0670992f8-92c6c9f4b8.zip/node_modules/prettier/",
+          "packageDependencies": [
+            ["prettier", "npm:2.2.1"]
           ],
           "linkType": "HARD",
         }]
@@ -1594,6 +1667,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["type-detect", [
+        ["npm:4.0.8", {
+          "packageLocation": "./.yarn/cache/type-detect-npm-4.0.8-8d8127b901-e01dc6ac90.zip/node_modules/type-detect/",
+          "packageDependencies": [
+            ["type-detect", "npm:4.0.8"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["uri-js", [
         ["npm:4.4.1", {
           "packageLocation": "./.yarn/cache/uri-js-npm-4.4.1-66d11cbcaf-7d8ae8e2d7.zip/node_modules/uri-js/",
@@ -1639,7 +1721,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["whether", "workspace:."],
-            ["mocha", "npm:8.3.2"]
+            ["chai", "npm:4.3.4"],
+            ["mocha", "npm:8.3.2"],
+            ["prettier", "npm:2.2.1"],
+            ["request", "npm:2.88.2"]
           ],
           "linkType": "SOFT",
         }]
