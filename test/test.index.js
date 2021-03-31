@@ -17,6 +17,8 @@ describe('Consuming Weather API', function() {
       request(url, function(err, res, body) {
         const all = JSON.parse(body.toString())
         expect(all).to.have.property('coord')
+        expect(all.coord).to.have.property('lat')
+        expect(all.coord).to.have.property('lon')
       })
     })
 
