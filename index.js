@@ -1,92 +1,63 @@
-const https = require('https')
-const fs = require('fs')
+const readline = require('readline')
+const fetch = require('node-fetch')
 
-let options = {
-  url: '',
-  zipcode: '',
-  country: '',
-  api_key: '',
-  lat: 0,
-  long: 0,
-}
-
-const zipcode = '10021'
-const country = 'us'
 const API_key = 'd3c15055294886db5cbaba813c393d87'
-const endpoints = {
-  current: `https://api.openweathermap.org/data/2.5/weather?zip=${zipcode},${country}&appid=${API_key}&units=imperial`,
-  forecast: `https://api.openweathermap.org/data/2.5/onecall?lat=40.7685&lon=-73.9588&exclude=current,daily,minutely,alerts&appid=${API_key}&units=imperial`,
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+let options = {}
+let urls = {}
+
+const getZip = () => {
+  return new Promise((resolve, reject) => {
+    rl.question('Enter zipcode: ', (answer) => {
+      options.zip = answer.trim()
+      resolve()
+    })
+  })
 }
 
-console.log('Enter zipcode')
-process.stdin.on('data', data => {
-  options.zipcode = data
-  process.exit()
-})
-
-console.log('Current weather or hourly forecast? [c/f]')
-process.stdin.on('data', data => {
-  if (data === 'c') {
-    options.url = endpoints.current
-  } else if (data === 'f') {
-    options.url = endpoints.forecast
-  } else {
-    console.log('Invalid input')
-  }
-})
-
-options.country = country
-options.api_key = API_key
-
-const getCoords = https.get(endpoints.current, res => {
-  if (res.statusCode !== 200) {
-    console.log(`Something went wrong. Status code: ${res.statusCode}`)
-  }
-  res.on('data', data => {
-    let body = JSON.parse(data.toString())
-    options.lat = body.coord.lat
-    options.lon = body.coord.lon
+const getCountry = () => {
+  return new Promise((resolve, reject) => {
+    rl.question('Enter two letter country code: ', (answer) => {
+      options.country = answer.trim()
+      resolve()
+    })
   })
-})
+}
 
-fs.writeFile('options.txt', JSON.stringify(options), (err) => {
-  if (err) {
-    console.error(err)
-  }
-})
-
-const currentWeather = https.get(endpoints.current, res => {
-  if (res.statusCode !== 200) {
-    console.log(`Something went wrong. Status code: ${res.statusCode}`)
-  }
-
-  res.on('data', data => {
-    let body = JSON.parse(data.toString())
-    let condition = body.weather[0].main.toLowerCase()
-    if (condition === 'rain') {
-      console.log('Bring an umbrella')
-    }
-    let actualTemp = body['main']['temp']
-    let feelsLike = body['main']['feels_like']
-    console.log(`Actual: ${actualTemp}, Feels like: ${feelsLike}`)
+const getQueryType = () => {
+  return new Promise((resolve, reject) => {
+    rl.question('Current weather or hourly forcast? [c/h] ', (answer) => {
+      options.queryType = answer.trim()
+      resolve()
+    })
   })
-})
+}
 
-const fc = https.get(endpoints.forecast, res => {
-  if (res.statusCode !== 200) {
-    console.log(`Something went wrong. Status code: ${res.statusCode}`)
+(async () => {
+  await getZip()
+  await getCountry()
+  await getQueryType()
+  rl.close()
+  urls.current = `https://api.openweathermap.org/data/2.5/weather?zip=${options.zip},${options.country}&appid=${API_key}&units=imperial`
+  const res = await fetch(urls.current)
+  const data = await res.json()
+  options.lat = data.coord.lat
+  options.lon = data.coord.lon
+  urls.forecast = `https://api.openweathermap.org/data/2.5/onecall?lat=${options.lat}&lon=${options.lon}&exclude=current,daily,minutely,alerts&appid=${API_key}&units=imperial`
+  const res2 = await fetch(urls.forecast)
+  const data2 = await res2.json()
+  let hours = data2.hourly
+  let temps = []
+  let feels = []
+  for (let i = 0; i < 4; i++) {
+    temps.push(hours[i].temp)
+    feels.push(hours[i].feels_like)
   }
-
-  res.once('data', data => {
-    let hours = JSON.parse(data.toString())['hourly']
-    console.log('Weather for the next four hours:')
-    let temps = []
-    let feels = []
-    for (let i = 0; i < 4; i++) {
-      temps.push(hours[i]['temp'])
-      feels.push(hours[i]['feels_like'])
-    }
-    console.log(temps)
-    console.log(feels)
-  })
-})
+  console.log(temps)
+  console.log(feels)
+})()
