@@ -1,1 +1,1 @@
-{"url":"","zipcode":"","country":"us","api_key":"d3c15055294886db5cbaba813c393d87"}
+{"url":"","zipcode":"","country":"us","api_key":"d3c15055294886db5cbaba813c393d87","lat":40.7685,"lon":-73.9588}

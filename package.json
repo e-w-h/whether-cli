@@ -1,12 +1,14 @@
 {
   "name": "whether",
+  "version": "1.0.0",
+  "description": "consume weather api",
+  "main": "index.js",
+  "repository": "https://github.com/e-w-h/whether-cli.git",
+  "author": "erichou.dev@gmail.com",
+  "license": "MIT",
   "dependencies": {
     "chai": "^4.3.4",
     "mocha": "^8.3.2",
-    "prettier": "^2.2.1",
-    "request": "^2.88.2"
-  },
-  "scripts": {
-    "test": "mocha"
+    "node-fetch": "^2.6.1"
   }
 }
