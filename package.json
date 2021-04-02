@@ -12,6 +12,7 @@
     "node-fetch": "^2.6.1"
   },
   "scripts": {
-    "test": "mocha test.index.js"
+    "test": "mocha test/",
+    "app": "node src/"
   }
 }
