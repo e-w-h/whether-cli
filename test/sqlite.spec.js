@@ -12,11 +12,11 @@ describe('Database actions', function() {
       zipcode: '10021',
       country_code: 'us',
     }
-      
+
     await db.init()
     await db.addLoc(LOCATION)
     const locs = await db.getLocs()
-    expect(locs.length).to.equal(1)
+    expect(locs.length).to.not.equal(0)
     expect(locs[0]).to.deep.equal(LOCATION)
   })
 })
