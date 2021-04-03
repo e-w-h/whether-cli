@@ -26,6 +26,8 @@ describe('Consuming Weather API', function() {
       const data = await res.json()
       expect(data).to.have.property('main')
       expect(data.main).to.have.property('temp')
+      expect(data).to.have.property('weather')
+      expect(data.weather[0]).to.have.property('main')
     })
   })
 
