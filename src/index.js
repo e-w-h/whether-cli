@@ -3,46 +3,27 @@ const fetch = require('node-fetch')
 
 const API_key = 'd3c15055294886db5cbaba813c393d87'
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
+function ask(query) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+  
+  return new Promise((res, rej) => {
+    rl.question(query, ans =>{
+      rl.close()
+      res(ans)
+    })
+  })
+}
 
 let options = {}
 let urls = {}
 
-const getZip = () => {
-  return new Promise((resolve, reject) => {
-    rl.question('Enter zipcode: ', (answer) => {
-      options.zip = answer.trim()
-      resolve()
-    })
-  })
-}
-
-const getCountry = () => {
-  return new Promise((resolve, reject) => {
-    rl.question('Enter two letter country code: ', (answer) => {
-      options.country = answer.trim()
-      resolve()
-    })
-  })
-}
-
-const getQueryType = () => {
-  return new Promise((resolve, reject) => {
-    rl.question('Current weather or hourly forcast? [c/h] ', (answer) => {
-      options.queryType = answer.trim()
-      resolve()
-    })
-  })
-}
-
 (async () => {
-  await getZip()
-  await getCountry()
-  await getQueryType()
-  rl.close()
+  options.zip = await ask('Enter zipcode: ')
+  options.country = await ask('Enter two letter country code: ')
+  options.queryType = await('Current weather or hourly forecast? [c/h] ')
   urls.current = `https://api.openweathermap.org/data/2.5/weather?zip=${options.zip},${options.country}&appid=${API_key}&units=imperial`
   const res = await fetch(urls.current)
   const data = await res.json()
@@ -58,6 +39,6 @@ const getQueryType = () => {
     temps.push(hours[i].temp)
     feels.push(hours[i].feels_like)
   }
-  console.log(temps)
-  console.log(feels)
+  console.log(temps.join(', '))
+  console.log(feels.join(', '))
 })()
