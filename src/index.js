@@ -1,7 +1,8 @@
 const readline = require('readline')
 const fetch = require('node-fetch')
+require('dotenv').config()
 
-const API_key = 'd3c15055294886db5cbaba813c393d87'
+let API_KEY = process.env.API_KEY
 
 function ask(query) {
   const rl = readline.createInterface({
@@ -20,7 +21,7 @@ function ask(query) {
 let options = {}
 let urls = {}
 
-(async () => {
+async function main() {
   options.zip = await ask('Enter zipcode: ')
   options.country = await ask('Enter two letter country code: ')
   options.queryType = await('Current weather or hourly forecast? [c/h] ')
@@ -41,4 +42,6 @@ let urls = {}
   }
   console.log(temps.join(', '))
   console.log(feels.join(', '))
-})()
+}
+
+main()
