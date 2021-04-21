@@ -1,5 +1,5 @@
 const readline = require("readline");
-const nodeFetch = require('node-fetch')
+const nodeFetch = require("node-fetch");
 require("dotenv").config();
 
 const API_KEY = process.env.API_KEY;
